@@ -6,10 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SAFRIZAL AI CONTENT OFFICE</title>
 <style>
-:root {
---bg:#08111f;--panel:#101c2d;--gold:#e6b85c;
---text:#f2f5fb;--muted:#9aabc2;--border:#26374e;
-}
+:root{--bg:#08111f;--panel:#101c2d;--panel2:#15243a;--gold:#e6b85c;--text:#f2f5fb;--muted:#9aabc2;--border:#26374e;--green:#56d39b}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif}
 header{padding:20px;background:#0c1727;border-bottom:1px solid var(--border)}
@@ -17,40 +14,38 @@ header{padding:20px;background:#0c1727;border-bottom:1px solid var(--border)}
 .sub{color:var(--muted);font-size:11px;margin-top:6px}
 main{max-width:1000px;margin:auto;padding:18px}
 h1{font-size:24px}
-h2{font-size:17px;margin-top:28px}
-.muted{color:var(--muted);font-size:13px}
+h2{font-size:18px;margin-top:28px}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:13px;padding:15px;margin-bottom:12px}
 .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
-.card{background:var(--panel);border:1px solid var(--border);border-radius:13px;padding:14px}
 .stat strong{display:block;color:var(--gold);font-size:25px}
 .stat span{font-size:11px;color:var(--muted)}
-input,select,textarea{
-width:100%;padding:12px;margin:7px 0 13px;
-background:#15243a;color:white;border:1px solid var(--border);
-border-radius:9px;font-size:14px
-}
-textarea{min-height:75px;resize:vertical}
 label{font-size:12px;color:var(--muted)}
-button{border:0;border-radius:9px;padding:11px 14px;
-background:var(--gold);color:#172033;font-weight:bold;cursor:pointer}
-button.secondary{background:#25364d;color:white}
+input,select,textarea{width:100%;padding:12px;margin:7px 0 13px;background:var(--panel2);color:white;border:1px solid var(--border);border-radius:9px;font-size:14px}
+textarea{min-height:95px;resize:vertical}
+button{border:0;border-radius:9px;padding:12px 15px;background:var(--gold);color:#172033;font-weight:bold;cursor:pointer}
+button.secondary{background:var(--panel2);color:white;border:1px solid var(--border)}
 button.danger{background:#7c303b;color:white}
-.task{margin:12px 0}
-.task h3{font-size:15px;margin:5px 0}
-.task p{font-size:12px;color:var(--muted)}
-.task-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
-.task-actions select{width:auto;flex:1;margin:0}
+.agent{display:flex;gap:10px;align-items:center}
+.agent-icon{font-size:23px}
+.agent-info{flex:1}
+.agent-info strong{font-size:14px}
+.agent-info small{display:block;color:var(--muted);margin-top:4px}
+.badge{font-size:11px;color:var(--green)}
+.task p{font-size:12px;color:var(--muted);line-height:1.6}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
 .empty{text-align:center;color:var(--muted);padding:20px}
+.result{color:var(--green);font-size:13px;line-height:1.7}
 footer{text-align:center;padding:25px;color:var(--muted);font-size:11px}
 </style>
 </head>
 <body>
 <header>
 <div class="brand">🏢 SAFRIZAL AI CONTENT OFFICE</div>
-<div class="sub">MULTI-CHANNEL AI CONTENT MANAGEMENT • VERSION 2.0</div>
+<div class="sub">AI MANAGER • MULTI-CHANNEL CONTENT SYSTEM • VERSION 3.0</div>
 </header>
 <main>
 <h1>Dashboard Kantor AI</h1>
-<p class="muted">Pusat pengelolaan tugas seluruh channel SAFRIZAL.</p>
+<p style="color:var(--muted)">Pusat kendali pekerjaan seluruh channel SAFRIZAL.</p>
 
 <h2>📊 Ringkasan Tugas</h2>
 <div class="stats">
@@ -59,92 +54,132 @@ footer{text-align:center;padding:25px;color:var(--muted);font-size:11px}
 <div class="card stat"><strong id="done">0</strong><span>Selesai</span></div>
 </div>
 
-<h2>➕ Buat Tugas Baru</h2>
+<h2>🧠 AI Manager — Pusat Perintah</h2>
 <div class="card">
-<label>Nama tugas</label>
-<input id="title" placeholder="Contoh: Buat 10 ide video Shorts">
-<label>Pilih channel</label>
-<select id="channel">
-<option>SAFRIZAL</option>
-<option>VYRON DJ</option>
-<option>FAKTA DUNIA</option>
-<option>UREUNG KAYA</option>
-<option>Affiliate Studio</option>
-</select>
-<label>Jenis pekerjaan</label>
-<select id="type">
-<option>Riset ide</option>
-<option>Penulisan naskah</option>
-<option>Lirik lagu</option>
-<option>Prompt gambar/video</option>
-<option>SEO YouTube/TikTok</option>
-<option>Pemeriksaan kualitas</option>
-</select>
-<label>Catatan tugas</label>
-<textarea id="notes" placeholder="Tambahkan arahan jika diperlukan"></textarea>
-<button onclick="addTask()">＋ Simpan Tugas</button>
+<p style="color:var(--muted);font-size:13px">Tuliskan perintah dalam bahasa Indonesia. Manager akan menentukan channel, jenis pekerjaan, dan Agent yang sesuai.</p>
+<label>Perintah kamu</label>
+<textarea id="command" placeholder="Contoh: Buatkan 10 ide video fakta hewan untuk FAKTA DUNIA"></textarea>
+<button onclick="processCommand()">Kirim Perintah ke Manager</button>
+<div id="managerResult" class="result" style="margin-top:15px"></div>
+</div>
+
+<h2>🤖 Tim AI</h2>
+<div class="card">
+<div class="agent"><span class="agent-icon">🧠</span><div class="agent-info"><strong>AI Manager</strong><small>Koordinator seluruh pekerjaan</small></div><span class="badge">Aktif</span></div><hr>
+<div class="agent"><span class="agent-icon">🔎</span><div class="agent-info"><strong>Research Agent</strong><small>Riset dan ide konten</small></div><span class="badge">Siap</span></div><hr>
+<div class="agent"><span class="agent-icon">✍️</span><div class="agent-info"><strong>Script Agent</strong><small>Naskah, narasi dan lirik</small></div><span class="badge">Siap</span></div><hr>
+<div class="agent"><span class="agent-icon">🎨</span><div class="agent-info"><strong>Creative Agent</strong><small>Konsep visual dan prompt video</small></div><span class="badge">Siap</span></div><hr>
+<div class="agent"><span class="agent-icon">📈</span><div class="agent-info"><strong>SEO Agent</strong><small>Judul, deskripsi dan metadata</small></div><span class="badge">Siap</span></div><hr>
+<div class="agent"><span class="agent-icon">🛡️</span><div class="agent-info"><strong>QC Agent</strong><small>Pemeriksaan kualitas</small></div><span class="badge">Siap</span></div>
 </div>
 
 <h2>📋 Daftar Tugas</h2>
 <div id="tasks"></div>
+
+<h2>➕ Tambah Tugas Manual</h2>
+<div class="card">
+<label>Nama tugas</label>
+<input id="manualTitle" placeholder="Nama tugas">
+<label>Channel</label>
+<select id="manualChannel">
+<option>SAFRIZAL</option><option>VYRON DJ</option><option>FAKTA DUNIA</option><option>UREUNG KAYA</option><option>Affiliate Studio</option>
+</select>
+<label>Jenis pekerjaan</label>
+<select id="manualType">
+<option>Riset ide</option><option>Penulisan naskah</option><option>Lirik lagu</option><option>Prompt gambar/video</option><option>SEO YouTube/TikTok</option><option>Pemeriksaan kualitas</option>
+</select>
+<button onclick="addManual()">Simpan Tugas Manual</button>
+</div>
 </main>
-<footer>
-SAFRIZAL AI CONTENT OFFICE • VERSION 2.0<br>
-Task Manager lokal — belum terhubung ke AI Agent.
-</footer>
+<footer>SAFRIZAL AI CONTENT OFFICE • VERSION 3.0<br>AI Manager berbasis aturan — belum terhubung ke layanan AI generatif.</footer>
 
 <script>
 let tasks=[];
-try {
+try{
 tasks=JSON.parse(localStorage.getItem("safrizalTasks")||"[]");
-if(!Array.isArray(tasks)) tasks=[];
-} catch(e){tasks=[];}
+if(!Array.isArray(tasks))tasks=[];
+}catch(e){tasks=[];}
 
-function save(){
-localStorage.setItem("safrizalTasks",JSON.stringify(tasks));
+function persist(){
+try{localStorage.setItem("safrizalTasks",JSON.stringify(tasks));}
+catch(e){alert("Penyimpanan browser tidak tersedia.");}
 render();
 }
-function addTask(){
-const title=document.getElementById("title").value.trim();
-if(!title){alert("Masukkan nama tugas terlebih dahulu.");return;}
-tasks.unshift({
-id:Date.now(),
-title:title,
-channel:document.getElementById("channel").value,
-type:document.getElementById("type").value,
-notes:document.getElementById("notes").value.trim(),
-status:"Menunggu"
-});
-document.getElementById("title").value="";
-document.getElementById("notes").value="";
-save();
+function routeAgent(type){
+if(type==="Riset ide")return "Research Agent";
+if(type==="Penulisan naskah"||type==="Lirik lagu")return "Script Agent";
+if(type==="Prompt gambar/video")return "Creative Agent";
+if(type==="SEO YouTube/TikTok")return "SEO Agent";
+return "QC Agent";
+}
+function detectChannel(text){
+let s=text.toLowerCase();
+if(s.includes("fakta dunia"))return "FAKTA DUNIA";
+if(s.includes("vyron"))return "VYRON DJ";
+if(s.includes("ureung kaya")||s.includes("si abu")||s.includes("si oren"))return "UREUNG KAYA";
+if(s.includes("affiliate"))return "Affiliate Studio";
+if(s.includes("safrizal"))return "SAFRIZAL";
+return "";
+}
+function detectType(text){
+let s=text.toLowerCase();
+if(s.includes("seo")||s.includes("hashtag")||s.includes("deskripsi")||s.includes("keyword"))return "SEO YouTube/TikTok";
+if(s.includes("prompt")||s.includes("gambar")||s.includes("thumbnail")||s.includes("video"))return "Prompt gambar/video";
+if(s.includes("lirik")||s.includes("lagu"))return "Lirik lagu";
+if(s.includes("naskah")||s.includes("narasi")||s.includes("cerita")||s.includes("script"))return "Penulisan naskah";
+return "Riset ide";
+}
+function processCommand(){
+let text=document.getElementById("command").value.trim();
+if(!text){alert("Tuliskan perintah terlebih dahulu.");return;}
+let channel=detectChannel(text);
+let type=detectType(text);
+if(!channel){
+document.getElementById("managerResult").textContent="Manager belum mengenali channel. Sebutkan SAFRIZAL, VYRON DJ, FAKTA DUNIA, UREUNG KAYA, atau Affiliate Studio.";
+return;
+}
+let agent=routeAgent(type);
+tasks.unshift({id:Date.now(),title:text,channel:channel,type:type,notes:"Diarahkan oleh AI Manager. Agent: "+agent,status:"Menunggu"});
+persist();
+document.getElementById("managerResult").innerHTML=
+"✅ Perintah diterima.<br>Channel: "+channel+
+"<br>Jenis: "+type+"<br>Agent tujuan: "+agent+
+"<br>Status: Menunggu. Tugas masuk ke daftar pekerjaan.";
+document.getElementById("command").value="";
+}
+function addManual(){
+let title=document.getElementById("manualTitle").value.trim();
+if(!title){alert("Isi nama tugas.");return;}
+let channel=document.getElementById("manualChannel").value;
+let type=document.getElementById("manualType").value;
+tasks.unshift({id:Date.now(),title:title,channel:channel,type:type,notes:"Tugas manual",status:"Menunggu"});
+persist();
+document.getElementById("manualTitle").value="";
 }
 function changeStatus(id,status){
-tasks=tasks.map(t=>t.id===id?{...t,status}:t);
-save();
+tasks=tasks.map(t=>t.id===id?{...t,status:status}:t);
+persist();
 }
 function removeTask(id){
 if(confirm("Hapus tugas ini?")){
 tasks=tasks.filter(t=>t.id!==id);
-save();
+persist();
 }
+}
+function escapeHTML(s){
+return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 }
 function render(){
 document.getElementById("waiting").textContent=tasks.filter(t=>t.status==="Menunggu").length;
 document.getElementById("running").textContent=tasks.filter(t=>t.status==="Berjalan").length;
 document.getElementById("done").textContent=tasks.filter(t=>t.status==="Selesai").length;
-const box=document.getElementById("tasks");
-if(!tasks.length){
-box.innerHTML='<div class="card empty">Belum ada tugas. Silakan buat tugas pertama.</div>';
-return;
-}
+let box=document.getElementById("tasks");
+if(!tasks.length){box.innerHTML='<div class="card empty">Belum ada tugas.</div>';return;}
 box.innerHTML=tasks.map(t=>`
 <div class="card task">
-<h3>${escapeHTML(t.title)}</h3>
-<p>Channel: ${escapeHTML(t.channel)}<br>
-Jenis: ${escapeHTML(t.type)}<br>
-Catatan: ${escapeHTML(t.notes||"-")}</p>
-<div class="task-actions">
+<strong>${escapeHTML(t.title)}</strong>
+<p>Channel: ${escapeHTML(t.channel)}<br>Jenis: ${escapeHTML(t.type)}<br>Catatan: ${escapeHTML(t.notes||"-")}</p>
+<div class="actions">
 <select onchange="changeStatus(${t.id},this.value)">
 <option ${t.status==="Menunggu"?"selected":""}>Menunggu</option>
 <option ${t.status==="Berjalan"?"selected":""}>Berjalan</option>
@@ -153,12 +188,6 @@ Catatan: ${escapeHTML(t.notes||"-")}</p>
 <button class="danger" onclick="removeTask(${t.id})">Hapus</button>
 </div>
 </div>`).join("");
-}
-function escapeHTML(s){
-return String(s).replace(/[&<>"']/g,c=>({
-"&":"&amp;","<":"&lt;",">":"&gt;",
-'"':"&quot;","'":"&#39;"
-}[c]));
 }
 render();
 </script>
