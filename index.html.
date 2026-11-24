@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SAFRIZAL AI CONTENT OFFICE</title>
+<style>
+:root{
+  --bg:#08111f;--panel:#101c2d;--panel2:#15243a;
+  --gold:#e6b85c;--text:#f2f5fb;--muted:#9aabc2;
+  --border:#26374e;--green:#56d39b;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:Arial,Helvetica,sans-serif;
+}
+header{
+  padding:22px 18px;border-bottom:1px solid var(--border);
+  background:#0c1727;position:sticky;top:0;z-index:5;
+}
+.brand{font-size:20px;font-weight:bold;color:var(--gold)}
+.subtitle{font-size:12px;color:var(--muted);margin-top:6px}
+main{max-width:1200px;margin:auto;padding:20px}
+.welcome{margin-bottom:22px}
+.welcome h1{font-size:25px;margin:0 0 8px}
+.welcome p{color:var(--muted);margin:0}
+.section-title{font-size:17px;margin:26px 0 14px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.card{
+  background:var(--panel);border:1px solid var(--border);
+  border-radius:15px;padding:16px;
+}
+.channel{min-height:130px}
+.channel .emoji{font-size:27px}
+.channel h3{margin:10px 0 6px;font-size:16px}
+.channel p{margin:0;color:var(--muted);font-size:12px;line-height:1.5}
+.status{font-size:11px;color:var(--green);margin-top:12px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.stat strong{font-size:24px;display:block;color:var(--gold)}
+.stat span{font-size:11px;color:var(--muted)}
+.agent{display:flex;align-items:center;gap:10px;margin:12px 0}
+.agent-icon{
+  width:36px;height:36px;border-radius:10px;
+  display:grid;place-items:center;background:var(--panel2)
+}
+.agent-info{flex:1}
+.agent-info strong{font-size:13px;display:block}
+.agent-info small{color:var(--muted)}
+.badge{font-size:10px;color:var(--green)}
+.activity{color:var(--muted);font-size:13px;line-height:1.8}
+button{
+  border:0;border-radius:12px;background:var(--gold);
+  color:#172033;padding:13px 16px;font-weight:bold;
+  font-size:14px;cursor:pointer
+}
+button.secondary{
+  background:var(--panel2);color:var(--text);
+  border:1px solid var(--border)
+}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+footer{text-align:center;padding:30px;color:var(--muted);font-size:12px}
+@media(min-width:700px){
+  .grid{grid-template-columns:repeat(3,1fr)}
+  main{padding:30px}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">🏢 SAFRIZAL AI CONTENT OFFICE</div>
+  <div class="subtitle">MULTI-CHANNEL AI CONTENT MANAGEMENT</div>
+</header>
+
+<main>
+  <section class="welcome">
+    <h1>Dashboard Kantor AI</h1>
+    <p>Selamat datang. Ini adalah pondasi kantor konten digital kita.</p>
+  </section>
+
+  <h2 class="section-title">📊 Ringkasan Tugas</h2>
+  <div class="stats">
+    <div class="card stat"><strong id="waiting">0</strong><span>Menunggu</span></div>
+    <div class="card stat"><strong id="running">0</strong><span>Berjalan</span></div>
+    <div class="card stat"><strong id="done">0</strong><span>Selesai</span></div>
+  </div>
+
+  <h2 class="section-title">🎬 Channel Konten</h2>
+  <div class="grid">
+    <div class="card channel">
+      <div class="emoji">🎸</div>
+      <h3>SAFRIZAL</h3>
+      <p>Musik original • Slow Rock Melayu</p>
+      <div class="status">● Channel Aktif</div>
+    </div>
+    <div class="card channel">
+      <div class="emoji">🎧</div>
+      <h3>VYRON DJ</h3>
+      <p>EDM • DJ Remix • Festival Music</p>
+      <div class="status">● Channel Aktif</div>
+    </div>
+    <div class="card channel">
+      <div class="emoji">🌍</div>
+      <h3>FAKTA DUNIA</h3>
+      <p>Fakta menarik • Hewan • Sains</p>
+      <div class="status">● Channel Aktif</div>
+    </div>
+    <div class="card channel">
+      <div class="emoji">🐱</div>
+      <h3>UREUNG KAYA</h3>
+      <p>Konten lucu • Si Abu & Si Oren</p>
+      <div class="status">● Channel Aktif</div>
+    </div>
+    <div class="card channel">
+      <div class="emoji">🛍️</div>
+      <h3>Affiliate Studio</h3>
+      <p>Produk • Kreatif • Promosi</p>
+      <div class="status">● Studio Aktif</div>
+    </div>
+  </div>
+
+  <h2 class="section-title">🤖 Tim AI (Tahap Awal)</h2>
+  <div class="card">
+    <div class="agent">
+      <div class="agent-icon">🧠</div>
+      <div class="agent-info"><strong>Manager AI</strong><small>Koordinator kantor</small></div>
+      <span class="badge">Demo</span>
+    </div>
+    <div class="agent">
+      <div class="agent-icon">🔎</div>
+      <div class="agent-info"><strong>Research Agent</strong><small>Riset ide & informasi</small></div>
+      <span class="badge">Demo</span>
+    </div>
+    <div class="agent">
+      <div class="agent-icon">✍️</div>
+      <div class="agent-info"><strong>Script Agent</strong><small>Naskah & lirik</small></div>
+      <span class="badge">Demo</span>
+    </div>
+    <div class="agent">
+      <div class="agent-icon">🎨</div>
+      <div class="agent-info"><strong>Creative Agent</strong><small>Visual & video prompt</small></div>
+      <span class="badge">Demo</span>
+    </div>
+    <div class="agent">
+      <div class="agent-icon">📈</div>
+      <div class="agent-info"><strong>SEO Agent</strong><small>Judul, deskripsi & metadata</small></div>
+      <span class="badge">Demo</span>
+    </div>
+    <div class="agent">
+      <div class="agent-icon">🛡️</div>
+      <div class="agent-info"><strong>Quality Control</strong><small>Pemeriksaan hasil</small></div>
+      <span class="badge">Demo</span>
+    </div>
+  </div>
+
+  <h2 class="section-title">📋 Aktivitas Terbaru</h2>
+  <div class="card activity" id="activity">
+    Pondasi dashboard berhasil dimuat.<br>
+    Belum ada tugas AI yang dijalankan.
+  </div>
+
+  <div class="actions">
+    <button onclick="newTask()">＋ Buat Tugas Demo</button>
+    <button class="secondary" onclick="resetTasks()">Reset Demo</button>
+  </div>
+</main>
+
+<footer>
+  SAFRIZAL AI CONTENT OFFICE • Foundation Version 1.0<br>
+  Dashboard demo — AI dan otomatisasi belum terhubung.
+</footer>
+
+<script>
+let tasks={waiting:0,running:0,done:0};
+function update(){
+  document.getElementById("waiting").textContent=tasks.waiting;
+  document.getElementById("running").textContent=tasks.running;
+  document.getElementById("done").textContent=tasks.done;
+}
+function newTask(){
+  tasks.waiting++;
+  update();
+  document.getElementById("activity").innerHTML=
+    "Tugas demo baru dibuat.<br>"+
+    "Status: Menunggu — belum dijalankan oleh AI.";
+}
+function resetTasks(){
+  tasks={waiting:0,running:0,done:0};
+  update();
+  document.getElementById("activity").innerHTML=
+    "Demo direset.<br>Belum ada tugas AI yang dijalankan.";
+}
+update();
+</script>
+</body>
+</html>
