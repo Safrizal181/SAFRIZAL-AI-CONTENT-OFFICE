@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -96,8 +95,9 @@ footer{text-align:center;padding:25px;color:var(--muted);font-size:11px}
 <script>
 let tasks=[];
 try{
-tasks=JSON.parse(localStorage.getItem("safrizalTasks")||"[]");
-if(!Array.isArray(tasks))tasks=[];
+ tasks=JSON.parse(localStorage.getItem("safrizalTasks")||"[]");
+ if(!Array.isArray(tasks))tasks=[];
+ tasks=tasks.filter(task=>task!==null&&typeof task==="object"&&!Array.isArray(task));
 }catch(e){tasks=[];}
 
 function persist(){
@@ -172,9 +172,10 @@ function escapeHTML(s){
 return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 }
 function render(){
-document.getElementById("waiting").textContent=tasks.filter(t=>t.status==="Menunggu").length;
-document.getElementById("running").textContent=tasks.filter(t=>t.status==="Berjalan").length;
-document.getElementById("done").textContent=tasks.filter(t=>t.status==="Selesai").length;
+tasks=Array.isArray(tasks)?tasks.filter(task=>task!==null&&typeof task==="object"&&!Array.isArray(task)):[];
+document.getElementById("waiting").textContent=tasks.filter(t=>t&&t.status==="Menunggu").length;
+document.getElementById("running").textContent=tasks.filter(t=>t&&t.status==="Berjalan").length;
+document.getElementById("done").textContent=tasks.filter(t=>t&&t.status==="Selesai").length;
 let box=document.getElementById("tasks");
 if(!tasks.length){box.innerHTML='<div class="card empty">Belum ada tugas.</div>';return;}
 box.innerHTML=tasks.map(t=>`
