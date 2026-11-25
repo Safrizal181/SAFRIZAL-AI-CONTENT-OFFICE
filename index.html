@@ -121,62 +121,47 @@ if(s.includes("affiliate"))return "Affiliate Studio";
 if(s.includes("safrizal"))return "SAFRIZAL";
 return "";
 }
-function detectType(function detectType(command) {
+  
+function detectType(command) {
   const text = command.toLowerCase();
 
-  // Riset dan ide konten
-  if (
-    text.includes("ide") ||
-    text.includes("riset") ||
-    text.includes("penelitian") ||
-    text.includes("cari fakta") ||
-    text.includes("topik") ||
-    text.includes("rekomendasi")
-  ) {
-    return "Riset ide";
-  }
-
-  // Lirik dan naskah
-  if (
-    text.includes("lirik") ||
-    text.includes("lagu") ||
-    text.includes("naskah") ||
-    text.includes("narasi") ||
-    text.includes("script")
-  ) {
-    return "Lirik/naskah";
-  }
-
-  // SEO
   if (
     text.includes("seo") ||
-    text.includes("judul") ||
-    text.includes("deskripsi") ||
     text.includes("hashtag") ||
+    text.includes("deskripsi") ||
+    text.includes("keyword") ||
+    text.includes("judul") ||
     text.includes("tag")
   ) {
-    return "SEO";
+    return "SEO YouTube/TikTok";
   }
 
-  // Prompt visual
   if (
     text.includes("prompt") ||
-    text.includes("thumbnail") ||
     text.includes("gambar") ||
+    text.includes("thumbnail") ||
+    text.includes("video") ||
     text.includes("visual")
   ) {
     return "Prompt gambar/video";
   }
 
+  if (text.includes("lirik") || text.includes("lagu")) {
+    return "Lirik lagu";
+  }
+
+  if (
+    text.includes("naskah") ||
+    text.includes("narasi") ||
+    text.includes("cerita") ||
+    text.includes("script")
+  ) {
+    return "Penulisan naskah";
+  }
+
   return "Riset ide";
-      }){
-let s=text.toLowerCase();
-if(s.includes("seo")||s.includes("hashtag")||s.includes("deskripsi")||s.includes("keyword"))return "SEO YouTube/TikTok";
-if(s.includes("prompt")||s.includes("gambar")||s.includes("thumbnail")||s.includes("video"))return "Prompt gambar/video";
-if(s.includes("lirik")||s.includes("lagu"))return "Lirik lagu";
-if(s.includes("naskah")||s.includes("narasi")||s.includes("cerita")||s.includes("script"))return "Penulisan naskah";
-return "Riset ide";
 }
+  
 function processCommand(){
 let text=document.getElementById("command").value.trim();
 if(!text){alert("Tuliskan perintah terlebih dahulu.");return;}
