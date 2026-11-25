@@ -134,24 +134,85 @@ if(s.includes("ide")||s.includes("riset")||s.includes("penelitian")||s.includes(
 return "Riset ide";
 }
       
-function processCommand(){
-let text=document.getElementById("command").value.trim();
-if(!text){alert("Tuliskan perintah terlebih dahulu.");return;}
-let channel=detectChannel(text);
-let type=detectType(text);
-if(!channel){
-document.getElementById("managerResult").textContent="Manager belum mengenali channel. Sebutkan SAFRIZAL, VYRON DJ, FAKTA DUNIA, UREUNG KAYA, atau Affiliate Studio.";
-return;
-}
-let agent=routeAgent(type);
-tasks.unshift({id:Date.now(),title:text,channel:channel,type:type,notes:"Diarahkan oleh AI Manager. Agent: "+agent,status:"Menunggu"});
-persist();
-document.getElementById("managerResult").innerHTML=
-"✅ Perintah diterima.<br>Channel: "+channel+
-"<br>Jenis: "+type+"<br>Agent tujuan: "+agent+
-"<br>Status: Menunggu. Tugas masuk ke daftar pekerjaan.";
-document.getElementById("command").value="";
-}
+
+async function processCommand() {
+  const text = document.getElementById("command").value.trim();
+  const resultBox = document.getElementById("managerResult");
+
+  if (!text) {
+    alert("Tuliskan perintah terlebih dahulu.");
+    return;
+  }
+
+  const channel = detectChannel(text);
+  const type = detectType(text);
+
+  if (!channel) {
+    resultBox.textContent =
+      "Manager belum mengenali channel. Sebutkan SAFRIZAL, VYRON DJ, FAKTA DUNIA, UREUNG KAYA, atau Affiliate Studio.";
+    return;
+  }
+
+  const agent = routeAgent(type);
+  const officeToken = document.getElementById("officeToken").value.trim();
+
+  if (!officeToken) {
+    alert("Masukkan Token Akses Kantor terlebih dahulu.");
+    return;
+  }
+
+  resultBox.textContent = "Sedang menghubungi Gemini...";
+
+  try {
+    const response = await fetch(
+      "https://safrizal-ai-bridge.tigaputra624953.workers.dev/research",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer " + officeToken
+        },
+        body: JSON.stringify({
+          prompt: text
+        })
+      }
+    );
+
+    const data = await response.json();
+
+    if (!response.ok || !data.success) {
+      throw new Error(data.error || "Gemini gagal memproses.");
+    }
+
+    const aiAnswer = data.answer;
+
+    tasks.unshift({
+      id: Date.now(),
+      title: text,
+      channel: channel,
+      type: type,
+      notes: "Diarahkan oleh AI Manager. Agent: " + agent,
+      status: "Menunggu"
+    });
+
+    persist();
+
+    resultBox.textContent =
+      "Perintah diterima.\n" +
+      "Channel: " + channel + "\n" +
+      "Jenis: " + type + "\n" +
+      "Agent tujuan: " + agent + "\n" +
+      "Status: Menunggu. Tugas masuk ke daftar pekerjaan.\n\n" +
+      "Jawaban Gemini:\n" + aiAnswer;
+
+    document.getElementById("command").value = "";
+
+  } catch (error) {
+    resultBox.textContent =
+      "Gagal menghubungi Gemini: " + error.message;
+  }
+} 
+
 function addManual(){
 let title=document.getElementById("manualTitle").value.trim();
 if(!title){alert("Isi nama tugas.");return;}
