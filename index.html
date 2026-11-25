@@ -56,8 +56,11 @@ footer{text-align:center;padding:25px;color:var(--muted);font-size:11px}
 <h2>🧠 AI Manager — Pusat Perintah</h2>
 <div class="card">
 <p style="color:var(--muted);font-size:13px">Tuliskan perintah dalam bahasa Indonesia. Manager akan menentukan channel, jenis pekerjaan, dan Agent yang sesuai.</p>
+<label>Token Akses Kantor</label>
+<input id="officeToken" type="password" placeholder="Masukkan token akses kantor">
+
 <label>Perintah kamu</label>
-<textarea id="command" placeholder="Contoh: Buatkan 10 ide video fakta hewan untuk FAKTA DUNIA"></textarea>
+<textarea id="command" placeholder="Tuliskan perintah untuk AI Manager"></textarea>
 <button onclick="processCommand()">Kirim Perintah ke Manager</button>
 <div id="managerResult" class="result" style="margin-top:15px"></div>
 </div>
