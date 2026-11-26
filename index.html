@@ -163,7 +163,15 @@ async function processCommand() {
 
   resultBox.textContent = "Sedang menghubungi Gemini...";
   try {
-    const endpoint = agent === "Script Agent" ? "/script" : "/research";
+    const endpointMap = {
+  "Research Agent": "/research",
+  "Script Agent": "/script",
+  "Creative Agent": "/creative",
+  "SEO Agent": "/seo",
+  "QC Agent": "/qc"
+};
+
+const endpoint = endpointMap[agent] || "/research";
 
     const response = await fetch(
       "https://safrizal-ai-bridge.tigaputra624953.workers.dev" + endpoint,
