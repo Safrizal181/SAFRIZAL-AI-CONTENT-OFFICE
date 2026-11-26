@@ -130,6 +130,8 @@ return "";
 }
 
 function detectType(text) {
+
+function detectType(text) {
   let s = text.toLowerCase();
 
   // QC Agent
@@ -166,6 +168,25 @@ function detectType(text) {
     s.includes("vo")
   ) return "Penulisan naskah";
 
+  // Research Agent — diperiksa sebelum Creative
+  if (
+    s.includes("riset") ||
+    s.includes("penelitian") ||
+    s.includes("riset awal") ||
+    s.includes("sejarah") ||
+    s.includes("fakta") ||
+    s.includes("sumber") ||
+    s.includes("referensi") ||
+    s.includes("diteliti") ||
+    s.includes("perlu verifikasi") ||
+    s.includes("gambaran topik") ||
+    s.includes("informasi") ||
+    s.includes("ide") ||
+    s.includes("topik") ||
+    s.includes("rekomendasi") ||
+    s.includes("penjelasan")
+  ) return "Riset ide";
+
   // Creative Agent
   if (
     s.includes("prompt") ||
@@ -176,18 +197,6 @@ function detectType(text) {
     s.includes("adegan") ||
     s.includes("animasi")
   ) return "Prompt gambar/video";
-
-  // Research Agent
-  if (
-    s.includes("ide") ||
-    s.includes("riset") ||
-    s.includes("penelitian") ||
-    s.includes("cari fakta") ||
-    s.includes("topik") ||
-    s.includes("rekomendasi") ||
-    s.includes("penjelasan") ||
-    s.includes("informasi")
-  ) return "Riset ide";
 
   return "Riset ide";
 }
