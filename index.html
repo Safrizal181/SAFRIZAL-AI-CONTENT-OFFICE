@@ -162,11 +162,13 @@ async function processCommand() {
   }
 
   resultBox.textContent = "Sedang menghubungi Gemini...";
-
   try {
+    const endpoint = agent === "Script Agent" ? "/script" : "/research";
+
     const response = await fetch(
-      "https://safrizal-ai-bridge.tigaputra624953.workers.dev/research",
+      "https://safrizal-ai-bridge.tigaputra624953.workers.dev" + endpoint,
       {
+  
         method: "POST",
         headers: {
           "Content-Type": "application/json",
