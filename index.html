@@ -108,13 +108,17 @@ try{localStorage.setItem("safrizalTasks",JSON.stringify(tasks));}
 catch(e){alert("Penyimpanan browser tidak tersedia.");}
 render();
 }
-function routeAgent(type){
-if(type==="Riset ide")return "Research Agent";
-if(type==="Penulisan naskah"||type==="Lirik lagu")return "Script Agent";
-if(type==="Prompt gambar/video")return "Creative Agent";
-if(type==="SEO YouTube/TikTok")return "SEO Agent";
-return "QC Agent";
+
+function routeAgent(type) {
+  if (type === "Riset ide") return "Research Agent";
+  if (type === "Penulisan naskah" || type === "Lirik lagu") return "Script Agent";
+  if (type === "Prompt gambar/video") return "Creative Agent";
+  if (type === "SEO YouTube/TikTok") return "SEO Agent";
+  if (type === "Pemeriksaan kualitas") return "QC Agent";
+
+  return "Research Agent";
 }
+
 function detectChannel(text){
 let s=text.toLowerCase();
 if(s.includes("fakta dunia"))return "FAKTA DUNIA";
@@ -124,15 +128,70 @@ if(s.includes("affiliate"))return "Affiliate Studio";
 if(s.includes("safrizal"))return "SAFRIZAL";
 return "";
 }
-function detectType(text){
-let s=text.toLowerCase();
-if(s.includes("seo")||s.includes("judul")||s.includes("hashtag")||s.includes("deskripsi")||s.includes("keyword")||s.includes("tag"))return "SEO YouTube/TikTok";
-if(s.includes("prompt")||s.includes("gambar")||s.includes("thumbnail")||s.includes("visual")||s.includes("video"))return "Prompt gambar/video";
-if(s.includes("lirik")||s.includes("lagu"))return "Lirik lagu";
-if(s.includes("naskah")||s.includes("narasi")||s.includes("cerita")||s.includes("script"))return "Penulisan naskah";
-if(s.includes("ide")||s.includes("riset")||s.includes("penelitian")||s.includes("cari fakta")||s.includes("topik")||s.includes("rekomendasi"))return "Riset ide";
-return "Riset ide";
+
+function detectType(text) {
+  let s = text.toLowerCase();
+
+  // QC Agent
+  if (
+    s.includes("qc") ||
+    s.includes("audit") ||
+    s.includes("evaluasi") ||
+    s.includes("periksa") ||
+    s.includes("koreksi") ||
+    s.includes("kritik") ||
+    s.includes("cek kualitas")
+  ) return "Pemeriksaan kualitas";
+
+  // SEO Agent
+  if (
+    s.includes("seo") ||
+    s.includes("judul") ||
+    s.includes("hashtag") ||
+    s.includes("deskripsi") ||
+    s.includes("keyword") ||
+    s.includes("kata kunci") ||
+    s.includes("tag")
+  ) return "SEO YouTube/TikTok";
+
+  // Script Agent
+  if (
+    s.includes("lirik") ||
+    s.includes("lagu") ||
+    s.includes("naskah") ||
+    s.includes("narasi") ||
+    s.includes("cerita") ||
+    s.includes("script") ||
+    s.includes("voice over") ||
+    s.includes("vo")
+  ) return "Penulisan naskah";
+
+  // Creative Agent
+  if (
+    s.includes("prompt") ||
+    s.includes("gambar") ||
+    s.includes("thumbnail") ||
+    s.includes("visual") ||
+    s.includes("storyboard") ||
+    s.includes("adegan") ||
+    s.includes("animasi")
+  ) return "Prompt gambar/video";
+
+  // Research Agent
+  if (
+    s.includes("ide") ||
+    s.includes("riset") ||
+    s.includes("penelitian") ||
+    s.includes("cari fakta") ||
+    s.includes("topik") ||
+    s.includes("rekomendasi") ||
+    s.includes("penjelasan") ||
+    s.includes("informasi")
+  ) return "Riset ide";
+
+  return "Riset ide";
 }
+
       
 
 async function processCommand() {
