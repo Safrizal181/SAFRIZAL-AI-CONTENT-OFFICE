@@ -136,14 +136,13 @@ function detectType(text) {
 
   // QC Agent — prioritas pertama
   if (
-    s.includes("qc") ||
-    s.includes("audit") ||
-    s.includes("evaluasi") ||
-    s.includes("periksa") ||
-    s.includes("koreksi") ||
-    s.includes("kritik") ||
-    s.includes("cek kualitas")
-  ) return "Pemeriksaan kualitas";
+  s.includes("qc") ||
+  s.includes("audit") ||
+  s.includes("evaluasi") ||
+  s.includes("koreksi") ||
+  s.includes("kritik") ||
+  s.includes("cek kualitas")
+) return "Pemeriksaan kualitas";
 
   // Creative Agent — sebelum SEO
   if (
